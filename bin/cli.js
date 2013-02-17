@@ -2,7 +2,9 @@
 
 var gist = require('../lib/gist');
 var fs = require('fs');
-var argv = require('optimist').argv;
+var argv = require('optimist')
+  .boolean(['create', 'del', 'list'])
+  .argv;
 
 // check authorize file exist
 try {
@@ -21,6 +23,19 @@ try {
     }
 
     if (argv.create) {
+      var files = {};
+      argv._.forEach(function(f) {
+        var content = fs.readFileSync(f);
+        if (content) {
+          files[f.toString()] = {content: content.toString()};
+        }
+      });
+      if (argv.desc) {
+        gist.create(files, argv.desc);
+      } else {
+        gist.create(files);
+      }
+    } else if (argv.del) {
     } else if (argv.list) {
       gist.list();
     } else {
