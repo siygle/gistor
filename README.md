@@ -20,9 +20,15 @@ gistor --create [--desc] {DESC} [files...]
 ```
 Create a gist contains the files you given. You can also write the description using `--desc`.
 
+### update
+```
+gistor --update [gist-id] -e
+```
+Use `-e` will open your default editor and load your file automatically. Edit it and save it then gistor will update your file to gist.
+
 ### delete
 ```
-gistor --remove [gist id]
+gistor --remove [gist-id]
 ```
 Delete the specific gist based on specific id.
 

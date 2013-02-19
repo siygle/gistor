@@ -3,7 +3,8 @@
 var gist = require('../lib/gist');
 var fs = require('fs');
 var argv = require('optimist')
-  .boolean(['create', 'remove', 'list'])
+  .boolean(['create', 'update', 'remove', 'list', 'edit'])
+  .alias('e', 'edit')
   .argv;
 
 // check authorize file exist
@@ -37,10 +38,13 @@ try {
       }
     } else if (argv.remove) {
       if (argv._[0]) {
-        console.log(argv._[0]);
         gist.remove(argv._[0]);
       } else {
         throw Error("Please input gist Id you want to delete");
+      }
+    } else if (argv.update) {
+      if (argv.edit) {
+        gist.updateEditor(argv._[0]);
       }
     } else if (argv.list) {
       gist.list();
