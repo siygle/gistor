@@ -5,22 +5,50 @@ var fs = require('fs');
 var argv = require('optimist')
   .boolean(['create', 'update', 'remove', 'list', 'edit'])
   .alias('e', 'edit')
+  .alias('h', 'help')
   .argv;
 
-// check authorize file exist
+/**
+ * Display helping message
+ */
+function displayHelp() {
+  var help = [
+    '',
+    '  Usage: gistor [options] [params]',
+    '',
+    '  Options:',
+    '',
+    '    --login --user <username> --pass <password>',
+    '    --create <file1, file2,...>',
+    '    --update [GistId] -e',
+    '    --remove [GsitId]',
+    '    --list',
+    '',
+    ''
+  ].join("\n");
+  process.stdout.write(help);
+}
+
 try {
   if (argv.login) {
-    if (!argv.user|| !argv.pass) {
+    if (!argv.user || !argv.pass) {
       throw Error("Input user and pass for login");
     } else {
       gist.login(argv.user, argv.pass);
     }
+  } else if (argv.help) {
+    displayHelp();
   } else {
-    var config = JSON.parse(fs.readFileSync(process.env.HOME + '/.gistor'));
-    if (!config || !config.token) {
-      throw Error("Config file error! Please run gistor login again");
+    var configPath = process.env.HOME + '/.gistor';
+    if (fs.existsSync(configPath)) {
+      var config = JSON.parse(fs.readFileSync(configPath));
+      if (!config || !config.token) {
+        throw Error("Config file error! Please run gistor --login again");
+      } else {
+        gist.config(config);
+      }
     } else {
-      gist.config(config);
+      throw Error("Missing gistor config, please run gistor --login first!");
     }
 
     if (argv.create) {
@@ -49,13 +77,10 @@ try {
     } else if (argv.list) {
       gist.list();
     } else {
-      throw Error('Not support this action');
+      displayHelp();
     }
   }
 } catch(e) {
-  if (e) {
-    console.log(e);
-  } else {
-    console.log('Missing config! Please do gistor login first');
-  }
+  console.error(e);
+  process.exit(1);
 }
