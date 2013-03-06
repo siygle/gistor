@@ -37,3 +37,9 @@ Delete the specific gist based on specific id.
 gistor --list
 ```
 It will list your gist, including Id and description. (Id is necessary in following action)
+
+### search
+```
+gist --search [keyword]
+```
+Search gist by keyword. Cause Github did not provide search API, parse the serach page right now.
