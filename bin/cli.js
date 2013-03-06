@@ -6,6 +6,7 @@ var argv = require('optimist')
   .boolean(['create', 'update', 'remove', 'list', 'edit'])
   .alias('e', 'edit')
   .alias('h', 'help')
+  .alias('v', 'version')
   .argv;
 
 /**
@@ -26,7 +27,7 @@ function displayHelp() {
     '',
     ''
   ].join("\n");
-  process.stdout.write(help);
+  console.log(help);
 }
 
 try {
@@ -38,6 +39,9 @@ try {
     }
   } else if (argv.help) {
     displayHelp();
+  } else if (argv.version) {
+    var pkg = require('../package.json');
+    console.log(pkg.version);
   } else {
     var configPath = process.env.HOME + '/.gistor';
     if (fs.existsSync(configPath)) {
