@@ -42,4 +42,11 @@ It will list your gist, including Id and description. (Id is necessary in follow
 ```
 gist --search [keyword]
 ```
-Search gist by keyword. Cause Github did not provide search API, parse the serach page right now.
+Search gist by keyword. Cause Github did not provide search API, parse the serach page right now. It will return the first 10 results just as gist searching page. The display format will just like follow:
+```
+=====
+Author - Gist Name
+Gist link
+-----
+File Content
+```

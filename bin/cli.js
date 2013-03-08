@@ -23,6 +23,7 @@ function displayHelp() {
     '    --create <file1, file2,...>',
     '    --update [GistId] -e',
     '    --remove [GsitId]',
+    '    --search [Keyword]',
     '    --list',
     '',
     ''

@@ -1,6 +1,6 @@
 {
   "name": "gistor",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A command tool help you manage gist easily",
   "main": "bin/cli.js",
   "bin": {
@@ -21,6 +21,7 @@
     "optimist": "~0.3.5",
     "request": "~2.12.0",
     "async": "~0.2.5",
-    "lodash": "~1.0.1"
+    "lodash": "~1.0.1",
+    "cheerio": "~0.10.7"
   }
 }
