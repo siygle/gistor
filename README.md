@@ -40,7 +40,7 @@ It will list your gist, including Id and description. (Id is necessary in follow
 
 ### search
 ```
-gist --search [keyword]
+gistor --search [keyword]
 ```
 Search gist by keyword. Cause Github did not provide search API, parse the serach page right now. It will return the first 10 results just as gist searching page. The display format will just like follow:
 ```
@@ -50,3 +50,9 @@ Gist link
 -----
 File Content
 ```
+
+### folk
+```
+gistor --folk [gist-id]
+```
+Folk the target gist, also return the url of your folk gist.

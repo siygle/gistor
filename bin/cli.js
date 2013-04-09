@@ -3,7 +3,7 @@
 var gist = require('../lib/gist');
 var fs = require('fs');
 var argv = require('optimist')
-  .boolean(['create', 'update', 'remove', 'list', 'edit', 'search'])
+  .boolean(['create', 'update', 'remove', 'list', 'edit', 'search', 'folk'])
   .alias('e', 'edit')
   .alias('h', 'help')
   .alias('v', 'version')
@@ -24,6 +24,7 @@ function displayHelp() {
     '    --update [GistId] -e',
     '    --remove [GsitId]',
     '    --search [Keyword]',
+    '    --folk [GistId]',
     '    --list',
     '',
     ''
@@ -86,6 +87,12 @@ try {
         gist.search(argv._[0]);
       } else {
         throw Error("Please input your search keyword");
+      }
+    } else if (argv.folk) {
+      if (argv._[0]) {
+        gist.folk(argv._[0]);
+      } else {
+        throw Error("Please input gist Id you want to folk");
       }
     } else {
       displayHelp();
