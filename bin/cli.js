@@ -3,7 +3,7 @@
 var gist = require('../lib/gist');
 var fs = require('fs');
 var argv = require('optimist')
-  .boolean(['create', 'update', 'remove', 'list', 'edit', 'search', 'folk'])
+  .boolean(['create', 'update', 'remove', 'list', 'edit', 'search', 'folk', 'get'])
   .alias('e', 'edit')
   .alias('h', 'help')
   .alias('v', 'version')
@@ -93,6 +93,19 @@ try {
         gist.folk(argv._[0]);
       } else {
         throw Error("Please input gist Id you want to folk");
+      }
+    } else if (argv.get) {
+      var file = argv.file;
+      if (argv._[0]) {
+        var input = new String(argv._[0]);
+        var url = input.match(/gist\.github\.com\/[\w]+\/([0-9]+)/);
+        if (url) {
+          gist.get(url[1], file);
+        } else {
+          gist.get(argv._[0], file);
+        }
+      } else {
+        throw Error("Please input gist url or gist Id");
       }
     } else {
       displayHelp();

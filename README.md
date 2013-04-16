@@ -56,3 +56,9 @@ File Content
 gistor --folk [gist-id]
 ```
 Folk the target gist, also return the url of your folk gist.
+
+### get
+```
+gistor --get [gist-url || gist-id] [--file FILENAME]
+```
+Download target gist to current location, gistor will use filename as default, but you can replace with a new filename, using `--file`.
