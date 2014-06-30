@@ -9,7 +9,10 @@
   "scripts": {
     "test": "npm test"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Ferrari/gistor"
+  },
   "keywords": [
     "gist",
     "github",
